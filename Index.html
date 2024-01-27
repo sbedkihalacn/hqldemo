@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenAI API Demo</title>
+</head>
+<body>
+    <h1>HQL to YAML Converter</h1>
+
+    <form id="conversionForm">
+        <label for="inputFile">Select HQL Files:</label>
+        <input type="file" id="inputFile" accept=".hql" multiple required>
+        <br>
+
+        <label for="outputFolder">Output Folder Name:</label>
+        <input type="text" id="outputFolder" required>
+        <br>
+
+        <button type="button" onclick="convertHqlFilesToYaml()">Convert</button>
+    </form>
+
+    <script src="mainscript.js"></script>
+</body>
+</html>
