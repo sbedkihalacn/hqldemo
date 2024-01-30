@@ -2,23 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>OpenAI API Demo for HQL to YAML conversion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HQL to YAML Converter</title>
 </head>
 <body>
-    <h1>HQL to YAML Converter</h1>
+    <button onclick="convertFiles()">Convert</button>
 
-    <form id="conversionForm">
-        <label for="inputFile">Select HQL Files:</label>
-        <input type="file" id="inputFile" accept=".hql" multiple required>
-        <br>
+    <script>
+        async function convertFiles() {
+            try {
+                const response = await fetch('https://hqlconvapp.azurewebsites.net', {
+                    method: 'POST',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    credentials: 'same-origin' ,
+                    headers: {
+                        'Accept': 'application/json',
+                        // Add any other headers required by your Azure Function
+                    }
+                });
 
-        <label for="outputFolder">Output Folder Name:</label>
-        <input type="text" id="outputFolder" required>
-        <br>
-
-        <button type="button" onclick="convertHqlFilesToYaml()">Convert</button>
-    </form>
-
-    <script src="mainscript.js"></script>
+                if (response.ok) {
+                    alert('Conversion successful! Check the "output" container for YAML files.');
+                } else {
+                    const errorMessage = await response.text();
+                    alert(`Conversion failed: ${errorMessage}`);
+                }
+            } catch (error) {
+                console.error('Error during conversion:', error);
+                alert('An error occurred during conversion. Please try again.');
+            }
+        }
+    </script>
 </body>
 </html>
